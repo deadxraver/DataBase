@@ -40,4 +40,3 @@ CREATE TABLE human (
     computer_id INTEGER,
     FOREIGN KEY (computer_id) REFERENCES computer (id)
 );
-
