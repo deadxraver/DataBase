@@ -1,3 +1,4 @@
+SET SEARCH_PATH = "schema_after_dop";
 INSERT INTO "WEB" (power)
 VALUES (100),
        (150),
@@ -22,6 +23,7 @@ VALUES ('Ubuntu', 1, 1, 1, 1),
        ('Windows', 1, 3, 2, 3),
        ('TempleOS', 2, 2, 2, 2),
        ('Debian', 3, 3, 2, 3);
+
 
 INSERT INTO "PEOPLE" (name, computer_id)
 VALUES ('Недри', 1),

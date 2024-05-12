@@ -1,3 +1,5 @@
+SET SEARCH_PATH = "schema_after_dop";
+
 CREATE TABLE "LIGHTNING_STRIKES"
 (
     id          SERIAL PRIMARY KEY,
@@ -39,13 +41,10 @@ CREATE TABLE "COMPUTERS"
     os_name        VARCHAR(15),
     ram_id         INTEGER NOT NULL,
     FOREIGN KEY (ram_id) REFERENCES "RAMS" (id),
-    ram_health     INTEGER NOT NULL CHECK ( ram_health BETWEEN 0 AND 100 )     DEFAULT 100,
     monitor_id     INTEGER NOT NULL,
     FOREIGN KEY (monitor_id) REFERENCES "MONITORS" (id),
-    monitor_health INTEGER NOT NULL CHECK ( monitor_health BETWEEN 0 AND 100 ) DEFAULT 100,
     memory_id      INTEGER NOT NULL,
     FOREIGN KEY (memory_id) REFERENCES "MEMORIES" (id),
-    memory_health  INTEGER NOT NULL CHECK ( memory_health BETWEEN 0 AND 100 )  DEFAULT 100,
     web_id         INTEGER,
     FOREIGN KEY (web_id) REFERENCES "WEB" (id)
 );
@@ -58,3 +57,11 @@ CREATE TABLE "PEOPLE"
     FOREIGN KEY (computer_id) REFERENCES "COMPUTERS" (id)
 );
 
+
+CREATE TABLE "COMPONENTS_HEALTH" (
+    computer_id INTEGER UNIQUE,
+    FOREIGN KEY (computer_id) REFERENCES "COMPUTERS" (id),
+    ram_health INTEGER CHECK ( ram_health BETWEEN 0 AND 100 ) DEFAULT 100,
+    monitor_health INTEGER CHECK ( monitor_health BETWEEN 0 AND 100 ) DEFAULT 100,
+    memory_health INTEGER CHECK ( memory_health BETWEEN 0 AND 100 ) DEFAULT 100
+);
